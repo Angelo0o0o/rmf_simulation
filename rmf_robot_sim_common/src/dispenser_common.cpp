@@ -153,6 +153,12 @@ void TeleportDispenserCommon::on_update(
     if (dispenser_filled)
     {
       RCLCPP_INFO(ros_node->get_logger(), "Dispensing item");
+      long int time = 10000000000;
+      float seconds = float(time)/1000000000;
+      RCLCPP_INFO(ros_node->get_logger(), "placing object\n");
+      RCLCPP_INFO(ros_node->get_logger(), "time required = %f seconds\n", seconds);
+      std::this_thread::sleep_for(std::chrono::nanoseconds(time));
+      RCLCPP_INFO(ros_node->get_logger(), "done placing object\n");
       bool res = dispense_on_nearest_robot(fill_robot_list_cb,
           find_nearest_model_cb, place_on_entity_cb,
           latest.transporter_type);

@@ -139,6 +139,11 @@ void TeleportIngestorCommon::on_update(
     if (!ingestor_filled)
     {
       RCLCPP_INFO(ros_node->get_logger(), "Ingesting item");
+      long int time = 10000000000;
+      float seconds = float(time)/1000000000;
+      RCLCPP_INFO(ros_node->get_logger(), "time required = %f seconds\n", seconds);
+      std::this_thread::sleep_for(std::chrono::nanoseconds(time));
+      RCLCPP_INFO(ros_node->get_logger(), "done ingesting object\n");
       bool res = ingest_from_nearest_robot(fill_robot_list_cb,
           find_nearest_model_cb, get_payload_model_cb,
           transport_model_cb, latest.transporter_type);
